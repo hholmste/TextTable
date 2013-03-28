@@ -32,26 +32,36 @@
         }
 
         def fieldsMeta = [:]
-
+        int maxWidth = 0
         fields.each { field ->
             fieldsMeta["$field"] = [:]
-            fieldsMeta["$field"]["width"] = Math.max(field.length(), rows.max { it."$field".size() }["$field"].size())
+            def width = Math.max(field.length(), rows.max { row -> row."$field".size() }["$field"].size())
+            maxWidth += width
+            fieldsMeta["$field"]["width"] = width
         }
 
+        maxWidth += (3 * fields.size()) + 1
+
+        println "-" * maxWidth
         print "|"
         fields.each { field ->
             int width = fieldsMeta["$field"]["width"]
             printf " %${width}s |", field
         }
         println ""
-        print "|"
+        println "-" * maxWidth
+
+
         rows.each { row ->
+            print "|"
             fields.each { field ->
                 int width = fieldsMeta["$field"]["width"]
                 printf " %${width}s |", row."$field"
             }
             println ""
         }
+
+        println "-" * maxWidth
     }
 
     static String asString(object) {
