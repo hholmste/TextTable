@@ -10,7 +10,7 @@ class TextTableTest extends Specification {
         use(TextTable) {
             [new TestObject(name: "Alpha", age: 2, colour: Color.BLACK, make: "Something fancy"),
                     new TestObject(name: "Beta", age: 1, colour: Color.WHITE, make: "An ugly thing"),
-                    [name: "Gamma", age: 3, make: "Invisible"]]
+                    [name: "Gamma", age: 3, make: "Invisible", armament: "Puny"]]
                     .printAsTable(System.out)
         }
         println "done"
